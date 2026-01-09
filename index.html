@@ -1,625 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Murvana | Portfolio</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Murvan | Portfolio</title>
 
-    <style>
+  <style>
+    :root{
+      --bg:#030712;
+      --accent:#38bdf8;
+      --accent2:#60a5fa;
+      --text:#eaf0ff;
+      --muted:rgba(234,240,255,.75);
+      --panel:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.12);
+      --shadow:rgba(0,0,0,.35);
+      --radius:18px;
+    }
 
-      :root{
-        --bg: #030712;            /* deeper space base */
-        --accent: #38bdf8;        /* cyan-blue */
-        --accent2: #60a5fa;       /* soft blue */
-        --text: #eaf0ff;
-        --muted: rgba(234, 240, 255, 0.75);
-        --panel: rgba(255, 255, 255, 0.06);
-        --panel-2: rgba(255, 255, 255, 0.04);
-        --border: rgba(255, 255, 255, 0.12);
-        --shadow: rgba(0, 0, 0, 0.35);
-        --radius: 18px;
-      }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
 
-      * {
-        box-sizing: border-box;
-      }
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        linear-gradient(rgba(2,6,23,.55),rgba(2,6,23,.65)),
+        url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1920&q=80")
+        center/115% 115% no-repeat fixed;
+      animation:spaceDrift 26s ease-in-out infinite alternate;
+      overflow-x:hidden;
+    }
 
-      html {
-        scroll-behavior: smooth;
-      }
+    @keyframes spaceDrift{
+      from{background-position:center,50% 50%}
+      to{background-position:center,53% 47%}
+    }
 
-      body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-        color: var(--text);
-        line-height: 1.55;
-
-  
-        position: relative;
-        overflow-x: hidden;
-
-  /* image + overlay + subtle motion */
-        background:
-        linear-gradient(rgba(2, 6, 23, 0.55), rgba(2, 6, 23, 0.65)),
-        url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa")
-        center / 115% 115% no-repeat fixed;
-        animation: spaceDrift 26s ease-in-out infinite alternate;
-        }
-
-        @keyframes spaceDrift {
-        0%   { background-position: center, 50% 50%; }
-        100% { background-position: center, 53% 47%; }
-        }
-      
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-      body::before,
-      body::after{
+    body::before,body::after{
       content:"";
-      position: fixed;
-      inset: -200px;
-      pointer-events: none;
-      z-index: 0;
-      background-repeat: repeat;
-      opacity: 0.9;
-      }
+      position:fixed;
+      inset:-200px;
+      pointer-events:none;
+      z-index:0;
+    }
 
-      /* small stars */
-      body::before{
+    body::before{
       background-image:
-      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.85) 99%, transparent 100%),
-      radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.70) 99%, transparent 100%),
-      radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.60) 99%, transparent 100%),
-      radial-gradient(1px 1px at 90% 10%, rgba(255,255,255,0.75) 99%, transparent 100%);
-      background-size: 280px 280px;
-      animation: starsMove 120s linear infinite;
-      filter: drop-shadow(0 0 2px rgba(56,189,248,0.15));
-      }
+        radial-gradient(1px 1px at 20% 30%,#fff 99%,transparent),
+        radial-gradient(1px 1px at 70% 80%,#fff 99%,transparent);
+      background-size:280px 280px;
+      animation:stars 120s linear infinite;
+      opacity:.8;
+    }
 
-      /* larger stars (slower, deeper layer) */
-      body::after{
+    body::after{
       background-image:
-      radial-gradient(2px 2px at 15% 25%, rgba(255,255,255,0.55) 99%, transparent 100%),
-      radial-gradient(2px 2px at 55% 75%, rgba(255,255,255,0.45) 99%, transparent 100%),
-      radial-gradient(2px 2px at 85% 35%, rgba(255,255,255,0.40) 99%, transparent 100%);
-      background-size: 520px 520px;
-      animation: starsMove2 200s linear infinite;
-      opacity: 0.65;
-      }
+        radial-gradient(2px 2px at 15% 25%,#fff 99%,transparent),
+        radial-gradient(2px 2px at 85% 35%,#fff 99%,transparent);
+      background-size:520px 520px;
+      animation:stars2 200s linear infinite;
+      opacity:.4;
+    }
 
-      @keyframes starsMove {
-      from { transform: translateY(0); }
-      to   { transform: translateY(260px); }
-      }
+    @keyframes stars{to{transform:translateY(260px)}}
+    @keyframes stars2{to{transform:translateY(180px)}}
 
-      @keyframes starsMove2 {
-      from { transform: translateY(0); }
-      to   { transform: translateY(180px); }
-      }
-      
-      a:hover {
-        text-decoration: underline;
-      }
+    @media(max-width:800px){
+      body{background-attachment:scroll}
+    }
 
-      .container {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 22px;
-        position: relative;
-        z-index: 1;
-      }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
 
-      .nav {
-        position: sticky;
-        top: 12px;
-        z-index: 5;
-        margin-bottom: 18px;
-        border: 1px solid var(--border);
-        background: rgba(10, 16, 30, 0.65);
-        backdrop-filter: blur(12px);
-        border-radius: var(--radius);
-        padding: 10px 12px;
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        align-items: center;
-        box-shadow: 0 14px 30px var(--shadow);
-      }
-      
-      .nav .left {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-      
-      .logo {
-        width: 34px;
-        height: 34px;
-        border-radius: 12px;
-        background: linear-gradient(
-          135deg,
-          rgba(125, 211, 252, 0.35),
-          rgba(167, 139, 250, 0.25)
-        );
-        border: 1px solid rgba(125, 211, 252, 0.25);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        color: var(--text);
-        letter-spacing: 0.5px;
-      }
-      
-      .name-mini {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-      }
-      
-      .name-mini strong {
-        font-size: 14px;
-      }
-      
-      .name-mini span {
-        font-size: 12px;
-        color: var(--muted);
-      }
+    .container{
+      max-width:1000px;
+      margin:0 auto;
+      padding:22px;
+      position:relative;
+      z-index:1;
+    }
 
-      .navlinks {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-      }
-      
-      .navlinks a {
-        color: var(--muted);
-        font-size: 13px;
-        padding: 8px 10px;
-        border-radius: 12px;
-        border: 1px solid transparent;
-      }
-      
-      .navlinks a:hover {
-        color: var(--text);
-        text-decoration: none;
-        border-color: rgba(255, 255, 255, 0.1);
-        background: rgba(255, 255, 255, 0.04);
-      }
+    .nav{
+      position:sticky;
+      top:12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      background:rgba(10,16,30,.65);
+      backdrop-filter:blur(12px);
+      border-radius:var(--radius);
+      box-shadow:0 14px 30px var(--shadow);
+    }
 
-      .hero {
-        border: 1px solid var(--border);
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.06),
-          rgba(255, 255, 255, 0.03)
-        );
-        border-radius: 24px;
-        padding: 28px;
-        box-shadow: 0 16px 36px var(--shadow);
-        overflow: hidden;
-        position: relative;
-      }
-      
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 12px;
-        color: var(--muted);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(255, 255, 255, 0.04);
-        padding: 6px 12px;
-        border-radius: 999px;
-      }
-      
-      h1 {
-        font-size: 38px;
-        line-height: 1.1;
-        margin: 12px 0 10px;
-        letter-spacing: -0.5px;
-      }
-      
-      .subtitle {
-        max-width: 70ch;
-        margin: 0;
-        color: var(--muted);
-        font-size: 15.5px;
-      }
-      
-      .cta {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-top: 16px;
-      }
-      
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px 14px;
-        border-radius: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(255, 255, 255, 0.04);
-        color: var(--text);
-        font-weight: 650;
-        font-size: 14px;
-        text-decoration: none;
-      }
-      
-      .btn:hover {
-        filter: brightness(1.08);
-        text-decoration: none;
-      }
-      
-      .btn.primary{
-        background: linear-gradient(135deg, rgba(56,189,248,0.22), rgba(96,165,250,0.18));
-        border-color: rgba(56,189,248,0.35);
-        box-shadow: 0 10px 30px rgba(56,189,248,0.12);
-      }
-      
-      .btn.ghost {
-        background: transparent;
-      }
+    .left{display:flex;gap:10px;align-items:center}
+    .logo{
+      width:34px;height:34px;border-radius:12px;
+      background:linear-gradient(135deg,rgba(125,211,252,.35),rgba(167,139,250,.25));
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;
+    }
 
-      section {
-        margin-top: 18px;
-      }
-      
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        gap: 14px;
-      }
-      
-      .card {
-        grid-column: span 12;
-        border: 1px solid var(--border);
-        background: rgba(10, 16, 30, 0.55);
-        backdrop-filter: blur(10px);
-        border-radius: var(--radius);
-        padding: 18px;
-        box-shadow: 0 14px 28px var(--shadow);
-      }
-      
-      .card h2 {
-        margin: 0 0 10px;
-        font-size: 18px;
-        letter-spacing: -0.2px;
-      }
-      
-      .card p {
-        margin: 0;
-        color: var(--muted);
-      }
+    .navlinks a{
+      font-size:13px;
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:12px;
+    }
 
-      @media (min-width: 900px) {
-      
-        .span-6 {
-          grid-column: span 6;
-        }
-      
-        .span-4 {
-          grid-column: span 4;
-        }
-      
-        .span-8 {
-          grid-column: span 8;
-        }
-      }
+    .navlinks a:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+      text-decoration:none;
+    }
 
-      .hr {
-        height: 1px;
-        background: rgba(255, 255, 255, 0.1);
-        margin: 14px 0;
-      }
+    .hero{
+      margin-top:18px;
+      padding:28px;
+      border-radius:24px;
+      border:1px solid var(--border);
+      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+      box-shadow:0 16px 36px var(--shadow);
+    }
 
-      .project {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      
-      .project-top {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-        align-items: flex-start;
-      }
-      
-      .project-title {
-        margin: 0;
-        font-size: 18px;
-      }
-      
-      .tags {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-top: 6px;
-      }
-      
-      .tag {
-        font-size: 12px;
-        color: var(--muted);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(255, 255, 255, 0.03);
-        padding: 4px 10px;
-        border-radius: 999px;
-      }
-      
-      ul {
-        margin: 0;
-        padding-left: 18px;
-        color: var(--muted);
-      }
+    h1{font-size:38px;margin:12px 0}
+    .subtitle{color:var(--muted);max-width:70ch}
 
-      footer {
-        text-align: center;
-        color: var(--muted);
-        font-size: 13px;
-        margin: 22px 0 10px;
-      }
-      
-    .project-top .cta,
-    .project-top .btn {
-      position: relative;
-      z-index: 50;
-      pointer-events: auto;
-      }
-    .card { position: relative; }
-    .project-top { position: relative; z-index: 2; }
-    .cta { position: relative; z-index: 3; }
-    .btn { position: relative; z-index: 4; pointer-events: auto; }
-      
-    </style>
-  </head>
+    .cta{display:flex;gap:10px;margin-top:16px}
+    .btn{
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      font-weight:600;
+    }
 
-  <body>
-    <div class="container">
-      <div class="nav">
-        <div class="left">
-          <div class="logo">M</div>
-          <div class="name-mini">
-            <strong>Dachi Murvanidze</strong>
-            <span>Computer Science & Artificial Intelligence Student • Tbilisi</span >
-          </div>
-        </div>
-        <div class="navlinks">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </div>
+    .btn.primary{
+      background:linear-gradient(135deg,rgba(56,189,248,.22),rgba(96,165,250,.18));
+    }
 
-      <header class="hero" id="top">
-        <span class="badge">💻 Computer Science & Artificial Intelligence • Year 1</span>
-        <h1>Building fundamentals into real projects.</h1>
-        <p class="subtitle">
-          I am a first-year Computer Science & Artificial Intelligence student at Caucasus University. I build
-          beginner-friendly tools and document what I learn. My focus is
-          programming fundamentals, math-based thinking, and clear technical
-          communication in English.
-        </p>
+    section{margin-top:18px}
 
-        <div class="cta">
-          <a class="btn primary" href="https://github.com/Murvana7" target="_blank" rel="noopener noreferrer"> GitHub</a>
-          <a class="btn ghost" href="#projects">See Projects</a>
-        </div>
-      </header>
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;
+    }
 
-      <section id="about">
-        <div class="grid">
-          <div class="card span-8">
-            <h2>About</h2>
-            <p>
-              I am building a strong portfolio from the first year by turning
-              university topics into practical projects. I enjoy structured
-              problem solving, clean code, and documenting solutions clearly.
-            </p>
-            <div class="hr"></div>
-            <p>
-              Current direction:
-              <strong>Python + automation + AI tools + Fullstack Development + Data Analysis</strong>
-             
-            </p>
-          </div>
+    .card{
+      grid-column:span 12;
+      padding:18px;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:rgba(10,16,30,.55);
+      backdrop-filter:blur(10px);
+      box-shadow:0 14px 28px var(--shadow);
+    }
 
-          <div class="card span-4">
-            <h2>Semester 1</h2>
-            <ul>
-              <li>Academic Writing</li>
-              <li>General English (C1)</li>
-              <li>Introduction to Programming 1</li>
-              <li>Calculus 1</li>
-              <li>World History (Civilizations)</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+    @media(min-width:900px){
+      .span-6{grid-column:span 6}
+    }
 
+    footer{
+      text-align:center;
+      font-size:13px;
+      color:var(--muted);
+      margin:24px 0;
+    }
+  </style>
+</head>
 
-      <section id="projects">
-        <div class="card">
-          <h2>Projects</h2>
-          <p>Replace the GitHub links below with your real repository links.</p>
-        </div>
+<body>
+<div class="container">
 
-        <div class="grid" style="margin-top: 14px">
-
-          <div class="card project span-6">
-            <div class="project-top">
-              <div>
-                <h3 class="project-title">Student Utility Console App</h3>
-                <div class="tags">
-                  <span class="tag">Python</span>
-                  <span class="tag">Fundamentals</span>
-                  <span class="tag">C</span>
-                </div>
-              </div>
-              <div class="cta" style="margin-top: 0">
-                <a class="btn" href="https://github.com/Murvana7/Student-Utility-Console-App" target="_blank" rel="noopener noreferrer"> Code</a>
-              </div>
-            </div>
-            <p>
-              A menu-based console app: calculator, prime checker, palindrome
-              checker, min/max finder, and grade average.
-            </p>
-            <div class="hr"></div>
-            <ul>
-              <li>Functions, loops, conditionals</li>
-              <li>Input validation & clean output</li>
-            </ul>
-          </div>
-
-          <div class="card project span-6">
-            <div class="project-top">
-              <div>
-                <h3 class="project-title">Function Analyzer Tool</h3>
-                <div class="tags">
-                  <span class="tag">C</span>
-                  <span class="tag">Phyton</span>
-                  <span class="tag">Numerical Methods</span>
-                  <span class="tag">Mathematical Analysis</span>
-                </div>
-              </div>
-              <div class="cta" style="margin-top: 0">
-                <a class="btn" href="https://github.com/Murvana7/Function-Analyzer-Tool" target="_blank" rel="noopener noreferrer"> Code</a>
-              </div>
-            </div>
-            <p>
-              A tool that takes a function, computes derivatives, evaluates
-              values, and plots the graph.
-            </p>
-            <div class="hr"></div>
-            <ul>
-              <li>Math → code thinking</li>
-              <li>Readable results + visualization</li>
-            </ul>
-          </div>
-
-          <div class="card project span-6">
-            <div class="project-top">
-              <div>
-                <h3 class="project-title">Technical Case Study</h3>
-                <div class="tags">
-                  <span class="tag">Academic Writing</span>
-                  <span class="tag">English C1</span>
-                </div>
-              </div>
-              <div class="cta" style="margin-top: 0">
-                <a class="btn" href="https://github.com/dmurvanidze-stack/case-study" target="_blank" rel="noopener"> Read</a>
-              </div>
-            </div>
-            <p>
-              A short technical write-up explaining one project: the problem,
-              solution, structure, and what I learned.
-            </p>
-            <div class="hr"></div>
-            <ul>
-              <li>Clear, structured explanation</li>
-              <li>Shows communication skill</li>
-            </ul>
-          </div>
-          <div class="card project span-6">
-            <div class="project-top">
-              <div>
-                <h3 class="project-title">
-                  Technology & Civilization Mini-Analysis
-                </h3>
-                <div class="tags">
-                  <span class="tag">World History</span>
-                  <span class="tag">Critical Thinking</span>
-                  <span class="tag">AI Context</span>
-                </div>
-              </div>
-              <div class="cta" style="margin-top: 0">
-                <a class="btn" href="https://github.com/dmurvanidze-stack/tech-civilization-essay" target="_blank" rel="noopener"> Read</a>
-              </div>
-            </div>
-            <p>
-              A short analysis connecting historical development of
-              civilizations with technology and modern AI.
-            </p>
-            <div class="hr"></div>
-            <ul>
-              <li>Thinking beyond code</li>
-              <li>Foundation for AI ethics topics</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="skills">
-        <div class="grid">
-          <div class="card span-6">
-            <h2>Skills</h2>
-            <ul>
-              <li>
-                <strong>Programming:</strong> C (basic), Phyton (beginner–intermediate)
-              </li>
-              <li><strong>Math:</strong> Calculus I foundations</li>
-              <li><strong>Tools:</strong> Git, GitHub, VS Code</li>
-              <li>
-                <strong>Interests:</strong> automation, beginner AI tools, data
-                analysis
-              </li>
-            </ul>
-          </div>
-
-          <div class="card span-6">
-            <h2>Currently Improving</h2>
-            <ul>
-              <li>Writing cleaner code (functions, structure)</li>
-              <li>Documenting projects (READMEs + examples)</li>
-              <li>Building small tools that solve real problems</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact">
-        <div class="card">
-          <h2>Contact</h2>
-          <p>
-          Email: <a href="mailto:d_murvanidze@cu.edu.ge">d_murvanidze@cu.edu.ge</a><br/>
-          GitHub:
-          <a href="https://github.com/dmurvanidze-stack" target="_blank" rel="noopener noreferrer">
-          https://github.com/Murvana7
-          </a><br/>
-          Mobile: <a href="tel:+995579350592">+995579350592</a><br/>
-          LinkedIn:<a href="https://www.linkedin.com/in/dachi-murvanidze-142004381/" target="_blank" rel="noopener noreferrer">
-          https://www.linkedin.com/in/dachi-murvanidze-142004381/
-          </a><br/>
-          </p>
-          <div class="hr"></div>
-          <p style="color: var(--muted); margin: 0"></p>
-        </div>
-      </section>
-
-      <footer>© 2025 Murvan </footer>
+  <div class="nav">
+    <div class="left">
+      <div class="logo">M</div>
+      <strong>Dachi Murvanidze</strong>
     </div>
-  </body>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+
+  <header class="hero">
+    <h1>Building fundamentals into real projects.</h1>
+    <p class="subtitle">
+      Computer Science & Artificial Intelligence student at Caucasus University,
+      focused on programming fundamentals, math-based thinking, and clear technical communication.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/Murvana7" target="_blank">GitHub</a>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="grid">
+      <div class="card span-6">
+        <h2>About</h2>
+        <p>Building a strong portfolio from the first year.</p>
+      </div>
+      <div class="card span-6">
+        <h2>Semester 1</h2>
+        <ul>
+          <li>Academic Writing</li>
+          <li>General English (C1)</li>
+          <li>Introduction to Programming</li>
+          <li>Calculus I</li>
+          <li>World History</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS (COMING SOON) -->
+  <section id="projects">
+    <div class="card">
+      <h2>Projects</h2>
+      <p>Currently building new projects. Updates coming soon.</p>
+    </div>
+
+    <div class="grid" style="margin-top:14px">
+      <div class="card span-6">
+        <h3>🚧 Project in Progress</h3>
+        <p>Python automation & real-world utilities.</p>
+      </div>
+      <div class="card span-6">
+        <h3>🚧 Project in Progress</h3>
+        <p>AI-related tools and data analysis experiments.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="grid">
+      <div class="card span-6">
+        <h2>Skills</h2>
+        <ul>
+          <li><strong>Programming:</strong> C (basic), Python</li>
+          <li><strong>Math:</strong> Calculus I foundations</li>
+          <li><strong>Tools:</strong> Git, GitHub, VS Code</li>
+        </ul>
+      </div>
+      <div class="card span-6">
+        <h2>Currently Improving</h2>
+        <ul>
+          <li>Clean code & structure</li>
+          <li>Project documentation</li>
+          <li>Automation & AI tools</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="card">
+      <h2>Contact</h2>
+      <p>
+        Email: <a href="mailto:d_murvanidze@cu.edu.ge">d_murvanidze@cu.edu.ge</a><br/>
+        GitHub: <a href="https://github.com/Murvana7" target="_blank">github.com/Murvana7</a><br/>
+        LinkedIn: <a href="https://www.linkedin.com/in/dachi-murvanidze-142004381/" target="_blank">LinkedIn</a>
+      </p>
+    </div>
+  </section>
+
+  <footer>© 2025 Murvan</footer>
+
+</div>
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
