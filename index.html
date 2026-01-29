@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Murvan | Portfolio</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <style>
     :root{
       --bg:#030712;
@@ -46,6 +46,30 @@
       pointer-events:none;
       z-index:0;
     }
+
+    .project-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.project-icon{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  color:var(--accent);
+  background:linear-gradient(
+    135deg,
+    rgba(56,189,248,.22),
+    rgba(96,165,250,.15)
+  );
+  box-shadow:0 8px 20px rgba(56,189,248,.18);
+}
+
 
     body::before{
       background-image:
@@ -403,11 +427,18 @@
     </div>
 
     <div class="card span-6">
-      <h3>Pixel Art Generator</h3>
-      <p class="subtitle">Create pixel art on a grid with color picker, clear, and resize tools.</p>
-      <p><strong>Tech:</strong> HTML, CSS, JavaScript</p>
-      <a href="https://github.com/Murvana7/Pixel-Art-Generator" target="_blank">GitHub →</a>
+    <div class="project-head">
+    <div class="project-icon">
+      <i class="fa-solid fa-palette"></i>
     </div>
+    <h3>Pixel Art Generator</h3>
+    </div>
+
+    <p class="subtitle">Create pixel art on a grid with color picker and clear tools.</p>
+    <p><strong>Tech:</strong> HTML, CSS, JavaScript</p>
+    <a href="https://github.com/Murvana7/Pixel-Art-Generator" target="_blank">GitHub →</a>
+  </div>
+
 
     <div class="card span-6">
       <h3>Simple Aspect Ratio Calculator</h3>
@@ -456,6 +487,7 @@
 </div>
 </body>
 </html>
+
 
 
 
